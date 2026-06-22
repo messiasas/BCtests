@@ -1,0 +1,8 @@
+[app]
+id=MAINAPP
+name=BCprolin-testes
+bin=BCprolin-testes
+artwork=
+desc=PAX POS Application
+vender=PAX
+version=2.0

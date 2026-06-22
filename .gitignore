@@ -1,0 +1,7 @@
+inc/
+lib/
+*.so
+*.a
+*.pem
+*.key
+storage/
