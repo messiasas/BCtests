@@ -4,10 +4,14 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../src/checkEvents.c \
+../src/inputValor.c \
 ../src/main.c \
 ../src/updateTables.c 
 
 OBJS += \
+./src/checkEvents.o \
+./src/inputValor.o \
 ./src/main.o \
 ./src/updateTables.o 
 

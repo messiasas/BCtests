@@ -64,42 +64,42 @@ int updateTables(){
 
 	  for (i = 0; tables[i]; i++) { // for (i = 0; records[i] != NULL; i++)
 
-	  OsLog(LOG_DEBUG, "[LOOP] i=%d n=%d strlen(rec)=%d strlen(records[%d])=%d", i, n, strlen(rec), i, strlen(tables[i]));
+	  //OsLog(LOG_DEBUG, "[LOOP] i=%d n=%d strlen(rec)=%d strlen(records[%d])=%d", i, n, strlen(rec), i, strlen(tables[i]));
 
 	   if (strlen(tables[i]) + strlen(rec) <= 999 && n < 99) {
 
-	    OsLog(LOG_DEBUG, "[ADD] Inserindo registro %d no lote. Tamanho atual=%d Tamanho registro=%d", i, strlen(rec), strlen(tables[i]));
+	    //OsLog(LOG_DEBUG, "[ADD] Inserindo registro %d no lote. Tamanho atual=%d Tamanho registro=%d", i, strlen(rec), strlen(tables[i]));
 
 	    strcat (rec, tables[i]); // Concatene essa string atual ao final da string rec
 	    n++; // Aqui ele conta quantos registros foram adicionados
 
-	    OsLog(LOG_DEBUG, "[COUNT] Registro adicionado. n=%d strlen(rec)=%d", n, strlen(rec));
+	    //OsLog(LOG_DEBUG, "[COUNT] Registro adicionado. n=%d strlen(rec)=%d", n, strlen(rec));
 	   }
 	   else {	// command is full
-		OsLog(LOG_DEBUG, "[CUT] Lote cheio! i=%d n=%d strlen(rec)=%d strlen(registro)=%d",i, n, strlen(rec),strlen(tables[i]));
-		OsLog(LOG_DEBUG,"[CUT] Registro atual nao cabe no lote. Registro[%d] tamanho=%d",i,strlen(tables[i]));
+		//OsLog(LOG_DEBUG, "[CUT] Lote cheio! i=%d n=%d strlen(rec)=%d strlen(registro)=%d",i, n, strlen(rec),strlen(tables[i]));
+		//OsLog(LOG_DEBUG,"[CUT] Registro atual nao cabe no lote. Registro[%d] tamanho=%d",i,strlen(tables[i]));
 
 		rec[0] = (n / 10) + '0'; rec[1] = (n % 10) + '0';
 
-		OsLog(LOG_DEBUG, "[HEADER] Cabecalho atualizado para %c%c (qtd registros=%d)",rec[0],rec[1], n);
-		OsLog(LOG_DEBUG,"[SEND] Enviando lote para kernel. strlen(rec)=%d",strlen(rec));
+		//OsLog(LOG_DEBUG, "[HEADER] Cabecalho atualizado para %c%c (qtd registros=%d)",rec[0],rec[1], n);
+		//OsLog(LOG_DEBUG,"[SEND] Enviando lote para kernel. strlen(rec)=%d",strlen(rec));
 
 		ret = PP_TableLoadRec(rec); // Aqui faz o envio para o Kernel
 
-		OsLog(LOG_DEBUG,"[SEND] PP_TableLoadRec retornou %d", ret);
+		//OsLog(LOG_DEBUG,"[SEND] PP_TableLoadRec retornou %d", ret);
 
 		if (ret) return ret;
 
 		/* O registro atual ainda nao foi enviado */
-		OsLog(LOG_DEBUG,"[NEW LOT] Registro %d nao foi enviado. Iniciando novo lote com ele.", i);
+		//OsLog(LOG_DEBUG,"[NEW LOT] Registro %d nao foi enviado. Iniciando novo lote com ele.", i);
 
 		snprintf (rec, sizeof (rec), "01%s", tables[i]); // Aqui faz o carregamento da tabela que nao foi carregada, sobreescrevendo a anterior:
 														// 03AAAABBBBCCCC se torna 01DDDD
 		n = 1;
 
-		OsLog(LOG_DEBUG, "[NEW LOT] Novo lote criado. n=%d strlen(rec)=%d", n,strlen(rec));
+		//OsLog(LOG_DEBUG, "[NEW LOT] Novo lote criado. n=%d strlen(rec)=%d", n,strlen(rec));
 
-		OsLog(LOG_DEBUG, "[NEW LOT] Inicio do novo lote: %.50s...", rec);
+		//OsLog(LOG_DEBUG, "[NEW LOT] Inicio do novo lote: %.50s...", rec);
 	   }
 	}
 	if (tables[i] == NULL && n > 0) {
@@ -111,5 +111,5 @@ int updateTables(){
 	OsLog(LOG_DEBUG, "PP_TableLoadEnd() %d", ret);
 	OsLog(LOG_DEBUG, "TOTAL REG: %d", i);
 	}
-return ret;
+	return ret;
 }
